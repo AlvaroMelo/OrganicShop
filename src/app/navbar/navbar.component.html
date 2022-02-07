@@ -1,0 +1,47 @@
+<!-- <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li ngbNavItem>
+        <a ngbNavLink routerLink="/shopping-cart"> Shopping Cart</a>
+        <ng-template ngbNavContent>
+            <br>
+        </ng-template>
+    </li>
+    <li ngbNavItem>
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+            <button class="btn btn-outline-primary" ngbDropdownToggle>Username</button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+                <button ngbDropdownItem>My Orders</button>
+                <button ngbDropdownItem>Manage Orders</button>
+                <button ngbDropdownItem>Manage Products</button>
+                <button ngbDropdownItem>Log Out</button>
+            </div>
+        </div>
+        <ng-template ngbNavContent></ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav"></div> -->
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" routerLink="/">O</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
+            </li>
+            <li ngbDropdown class="nav-item dropdown">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
+                    aria-expanded="false">Username</a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
+                    <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+                    <a class="dropdown-item" routerLink="admin/products">Manage Products</a>
+                    <a class="dropdown-item">Log Out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
