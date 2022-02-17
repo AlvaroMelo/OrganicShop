@@ -14,6 +14,9 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -43,7 +46,9 @@ import { LoginComponent } from './login/login.component';
       { path: 'admin/products', component: AdminProductsComponent },
       { path: 'admin/orders', component: AdminOrdersComponent },
     ]),
-    NgbModule
+    NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

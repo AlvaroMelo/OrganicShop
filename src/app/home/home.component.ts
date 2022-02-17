@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  users$: AngularFireList<any[]>;
+  constructor(private db: AngularFireDatabase) {
+    this.users$ = this.db.list('users');
+
+  }
 
   ngOnInit(): void {
+    console.log(this.users$);
   }
 
 }
