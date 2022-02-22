@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'organic-shop';
+
+  constructor(
+    private authService: AuthService,
+    router: Router,
+    private userService: UserService) {
+
+    authService.user$.subscribe(user => {
+      if(user) {
+        this.userService.save(user);
+        let returnUrl = localStorage.getItem('returnUrl');
+        router.navigate([returnUrl]);
+      }
+    });
+  }
+
 }
