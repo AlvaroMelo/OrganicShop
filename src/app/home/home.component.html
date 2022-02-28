@@ -1,19 +1,1 @@
 <p>home works!</p>
-
-<form #f="ngForm" (ngSubmit)="submit(f.value)">
-    <input type="text" ngModel name="name" placeholder="name">
-    <br>
-    <br>
-    <input type="text" ngModel name="isAdmin" placeholder="isAdmin">
-    <br>
-    <br>
-    <input type="email" ngModel name="email" placeholder="email">
-    <br>
-    <br>
-    <p>
-        {{ f.value | json}}
-    </p>
-
-    <button class="btn btn-primary">Submit</button>
-</form>
-
