@@ -1,32 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SnapshotAction } from '@angular/fire/compat/database';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppProduct } from 'src/models/app-product';
 import { ProductService } from '../services/product.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
+
   products$!: Observable<SnapshotAction<any>[]>;
-  products: AppProduct[] = [{
-    title: "",
-    price: 0,
-    category: "0",
-    imageUrl: ""
-  }];
+  products: any[] = [];
+  cartProducts: any[] = [];
   category!: string | null;
-  public key = "";
+
+  key = "";
+  subscribe: any;
 
   constructor(
     private productService: ProductService,
+    private shoppingCartService: ShoppingCartService,
     private route: ActivatedRoute
     ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+
+    this.subscribe = (await this.shoppingCartService.getAll()).subscribe((prod:SnapshotAction<any>[]) => {
+      this.cartProducts.splice(0);
+      prod.forEach(p => {
+        let item = {
+          title: p.payload.val().title,
+          quantity: p.payload.val().quantity,
+          price: p.payload.val().price,
+          image: p.payload.val().image,
+        };
+        this.cartProducts.push({productKey: p.key, ...item});
+
+      });
+      
+    });
     
     this.route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
@@ -43,11 +59,15 @@ export class ProductsComponent implements OnInit {
           title: p.payload.val().title,
           price: p.payload.val().price,
           category: p.payload.val().category,
-          imageUrl: p.payload.val().imageUrl
+          imageUrl: p.payload.val().imageUrl,
         };
-        this.products.push(temp);
+        this.products.push({isItemOnCart: false,  ...temp});
       });
     });
+  }
+
+  ngOnDestroy(): void {
+      this.subscribe.unsubscribe();
   }
 
 }

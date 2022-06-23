@@ -2,5 +2,5 @@ export interface AppProduct {
     category: string,
     imageUrl: string,
     price: number,
-    title: string
+    title: string,
 }

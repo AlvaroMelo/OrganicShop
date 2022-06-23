@@ -28,6 +28,7 @@ import { ProductService } from './services/product.service';
 import { DataTablesModule } from 'angular-datatables';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ItemsQuantityComponent } from './items-quantity/items-quantity.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ItemsQuantityComponent
   ],
   imports: [
     BrowserModule,
